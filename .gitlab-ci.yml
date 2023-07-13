@@ -1,0 +1,13 @@
+stages:
+  - code_analysis
+  - test
+
+tests:
+  stage: test
+  image: mcr.microsoft.com/playwright/python:v1.35.0-jammy
+  script:
+    - pytest --junitxml=report.xml
+  artifacts:
+    when: always
+    reports:
+      junit: report.xml
