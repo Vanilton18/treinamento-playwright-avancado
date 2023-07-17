@@ -1,7 +1,7 @@
 # test_search.py
 from pages.search import SearchPage
 from playwright.sync_api import Page, expect
-import  pytest
+import pytest
 
 
 # No teste
@@ -24,4 +24,3 @@ class TestBing:
     @pytest.mark.skip(reason="no way of currently testing this")
     def test_skip_example(self):
         assert 1 == 2
-
