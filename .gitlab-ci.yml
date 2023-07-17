@@ -2,12 +2,33 @@ stages:
   - code_analysis
   - test
 
-tests:
+
+flake8:
+  stage: code_analysis
+  image: registry.gitlab.com/pipeline-components/flake8:latest
+  script:
+    - flake8 --verbose --statistics --show-source
+
+chrome:
   stage: test
   image: mcr.microsoft.com/playwright/python:v1.35.0-jammy
   script:
-    - pytest --junitxml=report.xml
+    - python -m pip install --upgrade pip
+    - pip install -r requirements.txt
+    - pytest -s -v --junitxml=test-results.xml
   artifacts:
     when: always
     reports:
-      junit: report.xml
+      junit: test-results.xml
+
+firefox:
+  stage: test
+  image: mcr.microsoft.com/playwright/python:v1.35.0-jammy
+  script:
+    - python -m pip install --upgrade pip
+    - pip install -r requirements.txt
+    - pytest -s -v -r test --browser webkit --junitxml=test-results.xml
+  artifacts:
+    when: always
+    reports:
+      junit: test-results.xml

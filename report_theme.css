@@ -1,0 +1,7 @@
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  /* do not increase min-width as some may use split screens */
+  min-width: 800px;
+  background-color: rgba(58, 105, 0, 0.06);
+}
